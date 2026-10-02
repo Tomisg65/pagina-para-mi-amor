@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nuestra Playlist 🎵 - Hello Kitty & Chococat</title>
+
+        <style>
+            :root {
+                --kitty-pink: #ffb7c5;
+                --kitty-soft-pink: #ffe4e1;
+                --kitty-dark-pink: #ff69b4;
+                --choco-brown: #4a3b32;
+                --choco-cream: #fffdd0;
+                --pastel-lavender: #e6e6fa;
+                --pastel-mint: #e0f8e7;
+                --pastel-yellow: #fef9e7;
+                --pastel-peach: #ffdab9;
+                --white: #ffffff;
+
+                --radius-lg: 24px;
+                --radius-md: 16px;
+                --radius-sm: 10px;
+                --shadow-kawaii: 0 8px 20px rgba(74, 59, 50, 0.08);
+                --shadow-hover: 0 12px 25px rgba(255, 105, 180, 0.25);
+                --border-soft: 3px solid #ffffff;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family:
+                    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+
+            body {
+                background: linear-gradient(
+                    135deg,
+                    var(--kitty-soft-pink) 0%,
+                    var(--pastel-lavender) 50%,
+                    var(--pastel-mint) 100%
+                );
+                background-attachment: fixed;
+                color: var(--choco-brown);
+                min-height: 100vh;
+                line-height: 1.6;
+                overflow-x: hidden;
+                position: relative;
+                padding-bottom: 50px;
+            }
+
+            /* Ambient floating background elements */
+            .bg-floating-elements {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+                overflow: hidden;
+            }
+
+            .floating-element {
+                position: absolute;
+                bottom: -50px;
+                font-size: 1.5rem;
+                animation: floatUp 10s infinite linear;
+                opacity: 0.6;
+            }
+
+            .floating-element:nth-child(1) {
+                left: 8%;
+                animation-duration: 9s;
+                animation-delay: 0s;
+            }
+            .floating-element:nth-child(2) {
+                left: 22%;
+                animation-duration: 12s;
+                animation-delay: 2s;
+                font-size: 2rem;
+            }
+            .floating-element:nth-child(3) {
+                left: 42%;
+                animation-duration: 8s;
+                animation-delay: 4s;
+            }
+            .floating-element:nth-child(4) {
+                left: 65%;
+                animation-duration: 11s;
+                animation-delay: 1s;
+                font-size: 2.2rem;
+            }
+            .floating-element:nth-child(5) {
+                left: 80%;
+                animation-duration: 7s;
+                animation-delay: 3s;
+            }
+            .floating-element:nth-child(6) {
+                left: 92%;
+                animation-duration: 10s;
+                animation-delay: 5s;
+            }
+
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) rotate(0deg) scale(0.8);
+                    opacity: 0.7;
+                }
+                50% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-115vh) rotate(360deg) scale(1.2);
+                    opacity: 0;
+                }
+            }
+
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 20px;
+                position: relative;
+                z-index: 1;
+            }
+
+            /* Top Navigation Bar */
+            .nav-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 25px;
+                padding-top: 10px;
+            }
+
+            .btn-back {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: var(--white);
+                color: var(--choco-brown);
+                text-decoration: none;
+                padding: 10px 18px;
+                border-radius: var(--radius-md);
+                font-weight: 700;
+                font-size: 0.95rem;
+                border: 2px solid var(--kitty-pink);
+                box-shadow: var(--shadow-kawaii);
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .btn-back:hover {
+                transform: translateX(-5px);
+                background: var(--kitty-soft-pink);
+                box-shadow: var(--shadow-hover);
+            }
+
+            /* Main Header Header Section */
+            header {
+                text-align: center;
+                padding: 10px 20px 25px 20px;
+            }
+
+            .heart-badge {
+                display: inline-block;
+                background: var(--kitty-dark-pink);
+                color: var(--white);
+                padding: 6px 18px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                margin-bottom: 16px;
+                box-shadow: 0 4px 12px rgba(255, 105, 180, 0.4);
+                letter-spacing: 0.5px;
+            }
+
+            .characters-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 25px;
+                margin-bottom: 20px;
+            }
+
+            .character-card {
+                background: var(--white);
+                padding: 10px;
+                border-radius: 50%;
+                box-shadow: var(--shadow-kawaii);
+                border: 4px solid var(--kitty-pink);
+                width: 100px;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+
+            .character-card.chococat {
+                border-color: var(--choco-brown);
+                background-color: var(--choco-cream);
+            }
+
+            .character-card:hover {
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            .character-card.chococat:hover {
+                transform: scale(1.1) rotate(-5deg);
+            }
+
+            .character-img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .title-container h1 {
+                font-size: 2.3rem;
+                color: var(--choco-brown);
+                margin-bottom: 6px;
+            }
+
+            .title-container p {
+                font-size: 1.1rem;
+                color: #6a574b;
+                font-weight: 500;
+            }
+
+            /* Song Cards Container Layout */
+            .playlist-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+                gap: 22px;
+                margin-top: 20px;
+            }
+
+            .song-card {
+                background: rgba(255, 255, 255, 0.92);
+                backdrop-filter: blur(10px);
+                border-radius: var(--radius-lg);
+                padding: 22px;
+                border: var(--border-soft);
+                box-shadow: var(--shadow-kawaii);
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .song-card:hover {
+                transform: translateY(-6px);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .song-header {
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                margin-bottom: 14px;
+            }
+
+            /* Vinyl Album Art Styling */
+            .album-art {
+                width: 85px;
+                height: 85px;
+                border-radius: 50%;
+                background: var(--choco-brown);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                flex-shrink: 0;
+                border: 3px solid var(--white);
+                animation: spin 18s linear infinite;
+            }
+
+            .song-card:hover .album-art {
+                animation-play-state: running;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .album-art::before {
+                content: "";
+                width: 26px;
+                height: 26px;
+                background: var(--kitty-pink);
+                border-radius: 50%;
+                border: 3px solid var(--white);
+                z-index: 2;
+            }
+
+            .album-art-chococat::before {
+                background: var(--choco-cream);
+            }
+
+            .album-art-lavender::before {
+                background: var(--pastel-lavender);
+            }
+
+            .album-art-mint::before {
+                background: var(--pastel-mint);
+            }
+
+            .album-icon {
+                position: absolute;
+                font-size: 1.1rem;
+                z-index: 3;
+            }
+
+            .song-info {
+                flex-grow: 1;
+            }
+
+            .song-tag {
+                display: inline-block;
+                font-size: 0.72rem;
+                font-weight: 800;
+                padding: 3px 10px;
+                border-radius: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 6px;
+            }
+
+            .tag-pink {
+                background: var(--kitty-pink);
+                color: var(--white);
+            }
+            .tag-brown {
+                background: var(--choco-brown);
+                color: var(--choco-cream);
+            }
+            .tag-lavender {
+                background: #b19ffb;
+                color: var(--white);
+            }
+            .tag-mint {
+                background: #72d6a1;
+                color: var(--white);
+            }
+            .tag-peach {
+                background: #ffaa85;
+                color: var(--white);
+            }
+
+            .song-title {
+                font-size: 1.25rem;
+                color: var(--choco-brown);
+                font-weight: 800;
+                line-height: 1.2;
+                margin-bottom: 2px;
+            }
+
+            .song-artist {
+                font-size: 0.95rem;
+                color: var(--kitty-dark-pink);
+                font-weight: 600;
+            }
+
+            /* Description Frame */
+            .song-desc {
+                background: var(--pastel-yellow);
+                border-radius: var(--radius-sm);
+                padding: 12px 14px;
+                font-size: 0.88rem;
+                color: #5d4b3e;
+                margin-bottom: 16px;
+                border-left: 4px solid var(--kitty-pink);
+                line-height: 1.5;
+            }
+
+            /* Pure CSS Kawaii Audio Player Controls */
+            .player-bar {
+                background: rgba(255, 255, 255, 0.7);
+                border-radius: var(--radius-md);
+                padding: 10px 14px;
+                border: 1px solid rgba(255, 183, 197, 0.5);
+            }
+
+            .progress-container {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 8px;
+            }
+
+            .time-stamp {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #8c786c;
+            }
+
+            .progress-bar {
+                flex-grow: 1;
+                height: 8px;
+                background: var(--kitty-soft-pink);
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    var(--kitty-pink),
+                    var(--kitty-dark-pink)
+                );
+                border-radius: 10px;
+            }
+
+            .player-controls {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .control-btn {
+                background: var(--white);
+                border: 1.5px solid var(--kitty-pink);
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.85rem;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                transition:
+                    transform 0.2s ease,
+                    background 0.2s ease;
+            }
+
+            .control-btn:hover {
+                transform: scale(1.15);
+                background: var(--kitty-soft-pink);
+            }
+
+            .control-btn.play {
+                width: 40px;
+                height: 40px;
+                background: var(--kitty-dark-pink);
+                color: var(--white);
+                border: none;
+                font-size: 1rem;
+                box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+            }
+
+            .control-btn.play:hover {
+                background: #ff4797;
+            }
+
+            footer {
+                text-align: center;
+                padding: 30px 20px 10px 20px;
+                font-size: 0.9rem;
+                color: #7a685c;
+            }
+
+            @media (max-width: 600px) {
+                .playlist-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .title-container h1 {
+                    font-size: 1.8rem;
+                }
+
+                .character-card {
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bg-floating-elements">
+            <div class="floating-element">🎵</div>
+            <div class="floating-element">🎀</div>
+            <div class="floating-element">🎧</div>
+            <div class="floating-element">💖</div>
+            <div class="floating-element">🐾</div>
+            <div class="floating-element">✨</div>
+        </div>
+
+        <div class="container">
+            <div class="nav-header">
+                <a href="/" class="btn-back">
+                    <span>←</span> Volver al Inicio
+                </a>
+                <span style="font-size: 1.2rem;">🎀🐾</span>
+            </div>
+
+            <header>
+                <span class="heart-badge">Nuestra Playlist</span>
+
+
+                <div class="title-container">
+                    <h1>Las Canciones Que Me Recuerdan A Ti 🎶</h1>
+                    <p>Una melodía especial para cada momento bonito juntos</p>
+                </div>
+            </header>
+
+            <main class="playlist-grid">
+                <!-- CANCIÓN 1: MILO J - LIVE SET -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art album-art-chococat">
+                            <span class="album-icon">🎙️</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-brown"
+                                >Mucha Vibra ✨</span
+                            >
+                            <h2 class="song-title">Live Set</h2>
+                            <div class="song-artist">Milo J</div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        Y cuando esté mal sé que tu mirada hará que sonría, yeh
+                        Si miro pa atrás, si lloro el pasado, haces que me ría
+                        No sé qué hice pa merecerte, pero estoy agradecío. Tal
+                        vez fue más cuestión de suerte que se crucen tu alma con
+                        la mía
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">1:45</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 55%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">3:20</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CANCIÓN 2: MILO J - M.A.I -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art">
+                            <span class="album-icon">🎀</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-pink"
+                                >Nuestra Favorita 💖</span
+                            >
+                            <h2 class="song-title">M.A.I</h2>
+                            <div class="song-artist">Milo J</div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        No me imaginé que funcionaba así, no buscaba amor Y un
+                        día te encontré, estaba vivo pero con vos comencé a
+                        vivir Fuiste una bendición, me queda agradecer
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">2:10</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">2:45</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CANCIÓN 3: MILO J - DESEO PERDER -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art album-art-lavender">
+                            <span class="album-icon">🌙</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-lavender"
+                                >Nostalgia Suave ☁️</span
+                            >
+                            <h2 class="song-title">DESEO PERDER</h2>
+                            <div class="song-artist">Milo J</div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        Estás haciendo hermoso este desastre Envidio al espejo
+                        por mirarte Quiero aprenderme tu cuerpo hasta el
+                        amanecer
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">0:50</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 35%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">2:30</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CANCIÓN 4: MILO J - ALMA DE MI SOL -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art album-art-mint">
+                            <span class="album-icon">☀️</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-peach"
+                                >Luz & Cálidez 🌻</span
+                            >
+                            <h2 class="song-title">Alma De Mi Sol</h2>
+                            <div class="song-artist">Milo J</div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        Hoy me encontré, Dama magistral Sus puertas del Edén Son
+                        el caminito pa recorrer Con alas la eternidad.
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">1:15</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">3:05</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CANCIÓN 5: FRANK OCEAN - PINK + WHITE -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art">
+                            <span class="album-icon">🌸</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-pink"
+                                >Atardeceres Contigo 🌅</span
+                            >
+                            <h2 class="song-title">Pink + White</h2>
+                            <div class="song-artist">Frank Ocean</div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        Just the same way you showed me, showed me You showed me
+                        love Glory from above Regard my dear
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">1:30</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 50%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">3:04</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CANCIÓN 6: STEVE LACY - INFRUNAMI -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art album-art-chococat">
+                            <span class="album-icon">🎸</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-brown"
+                                >Toque R&B / Chill ☕</span
+                            >
+                            <h2 class="song-title">Infrunami</h2>
+                            <div class="song-artist">Steve Lacy</div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        Girl, you're the one I want You're the one I need I'm
+                        beggin' you, please
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">2:00</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">2:58</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CANCIÓN 7: KENDRICK LAMAR - LOVE. -->
+                <article class="song-card">
+                    <div class="song-header">
+                        <div class="album-art album-art-mint">
+                            <span class="album-icon">❤️️</span>
+                        </div>
+                        <div class="song-info">
+                            <span class="song-tag tag-mint"
+                                >Amor Incondicional 🔐</span
+                            >
+                            <h2 class="song-title">LOVE.</h2>
+                            <div class="song-artist">
+                                Kendrick Lamar ft. Zacari
+                            </div>
+                        </div>
+                    </div>
+                    <div class="song-desc">
+                        I wanna be with you, ayy (just love me) I wanna be with
+                        (just love me, just love) I wanna be with you, ayy (love
+                        me), I wanna be with I wanna be with you (love me, just
+                        love me)
+                    </div>
+                    <div class="player-bar">
+                        <div class="progress-container">
+                            <span class="time-stamp">2:40</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 82%;">
+                                </div>
+                            </div>
+                            <span class="time-stamp">3:33</span>
+                        </div>
+                        <div class="player-controls">
+                            <button class="control-btn" aria-label="Anterior"
+                                >⏮</button
+                            >
+                            <button
+                                class="control-btn play"
+                                aria-label="Reproducir">▶</button
+                            >
+                            <button class="control-btn" aria-label="Siguiente"
+                                >⏭</button
+                            >
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+            <footer>
+                <p>
+                    Hecho para escuchar juntos • Hello Kitty & Chococat Music
+                    Corner 🐾🎧
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>
