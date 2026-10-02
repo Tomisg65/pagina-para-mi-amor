@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nuestros Recuerdos 📸 | Sanrio Theme</title>
+        <style>
+            /* ==========================================================================
+       VARIABLES Y REGLAS BÁSICAS
+       ========================================================================== */
+            :root {
+                --bg-color: #fdf0f4;
+                --hk-pink: #ffb7c5;
+                --hk-dark-pink: #f48fb1;
+                --hk-red: #ff5252;
+                --choco-brown: #5d4037;
+                --choco-dark: #3e2723;
+                --choco-orange: #ffab40;
+                --pastel-yellow: #fff9c4;
+                --pastel-blue: #e1f5fe;
+                --text-main: #4a3e3d;
+                --card-bg: #ffffff;
+                --font-family:
+                    "Comic Sans MS", "Chalkboard SE", "Comic Neue", cursive,
+                    sans-serif;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-main);
+                font-family: var(--font-family);
+                min-height: 100vh;
+                padding: 20px 15px 50px 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-image:
+                    radial-gradient(var(--hk-pink) 15%, transparent 16%),
+                    radial-gradient(var(--choco-orange) 15%, transparent 16%);
+                background-size: 60px 60px;
+                background-position:
+                    0 0,
+                    30px 30px;
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* ==========================================================================
+       ELEMENTOS DE NAVEGACIÓN Y ENCABEZADO
+       ========================================================================== */
+            .nav-container {
+                width: 100%;
+                max-width: 900px;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 30px;
+                gap: 10px;
+                z-index: 10;
+            }
+
+            .btn-nav {
+                background-color: var(--card-bg);
+                color: var(--choco-brown);
+                border: 3px solid var(--hk-pink);
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-family: inherit;
+                font-weight: bold;
+                font-size: 0.95rem;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                transition: all 0.2s ease;
+            }
+
+            .btn-nav:hover {
+                transform: translateY(-3px) scale(1.03);
+                background-color: var(--hk-pink);
+                color: white;
+                border-color: var(--hk-dark-pink);
+                box-shadow: 0 6px 15px rgba(244, 143, 177, 0.4);
+            }
+
+            .header-box {
+                background: var(--card-bg);
+                border: 4px dashed var(--hk-dark-pink);
+                border-radius: 30px;
+                padding: 25px 30px;
+                text-align: center;
+                max-width: 700px;
+                width: 100%;
+                margin-bottom: 40px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+                position: relative;
+            }
+
+            .header-box h1 {
+                color: var(--choco-brown);
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .header-box p {
+                color: #6d5d5b;
+                font-size: 1.05rem;
+                line-height: 1.5;
+            }
+
+            .header-avatar {
+                width: 50px;
+                height: 50px;
+                object-fit: contain;
+                vertical-align: middle;
+            }
+
+            /* ==========================================================================
+    GRID DE 4 RECUERDOS (POLAROIDS)
+       ========================================================================== */
+            .memories-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px 30px;
+                width: 100%;
+                max-width: 850px;
+                margin: 0 auto 50px auto;
+                z-index: 5;
+            }
+
+            @media (max-width: 680px) {
+                .memories-grid {
+                    grid-template-columns: 1fr;
+                    max-width: 400px;
+                }
+            }
+
+            .polaroid-card {
+                background: var(--card-bg);
+                padding: 18px 18px 25px 18px;
+                border-radius: 4px;
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+                position: relative;
+                transition:
+                    transform 0.3s ease,
+                    box-shadow 0.3s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Rotaciones alternadas tipo Polaroid real */
+            .polaroid-card:nth-child(1) {
+                transform: rotate(-2.5deg);
+            }
+            .polaroid-card:nth-child(2) {
+                transform: rotate(2deg);
+            }
+            .polaroid-card:nth-child(3) {
+                transform: rotate(1.8deg);
+            }
+            .polaroid-card:nth-child(4) {
+                transform: rotate(-2deg);
+            }
+
+            .polaroid-card:hover {
+                transform: scale(1.04) rotate(0deg) !important;
+                z-index: 20;
+                box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Cintas Adhesivas (Washi Tape) */
+            .washi-tape {
+                position: absolute;
+                top: -15px;
+                width: 100px;
+                height: 28px;
+                opacity: 0.85;
+                z-index: 2;
+            }
+
+            .washi-pink {
+                background: rgba(255, 183, 197, 0.7);
+                border-left: 2px dashed rgba(255, 255, 255, 0.5);
+                border-right: 2px dashed rgba(255, 255, 255, 0.5);
+                transform: rotate(-3deg);
+            }
+
+            .washi-yellow {
+                background: rgba(255, 249, 196, 0.8);
+                border-left: 2px dashed rgba(0, 0, 0, 0.1);
+                border-right: 2px dashed rgba(0, 0, 0, 0.1);
+                transform: rotate(4deg);
+            }
+
+            /* Marco Contenedor de la Imagen */
+            .photo-frame {
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                background-color: #f7f3f5;
+                border: 2px dashed var(--hk-pink);
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                position: relative;
+                margin-bottom: 18px;
+            }
+
+            /* Si quieres poner tu foto, la etiqueta <img> usará esta clase */
+            .photo-frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .photo-placeholder-content {
+                text-align: center;
+                padding: 15px;
+                color: #9e8e8c;
+            }
+
+            .photo-placeholder-icon {
+                font-size: 2.5rem;
+                margin-bottom: 8px;
+                display: block;
+                opacity: 0.7;
+            }
+
+            .photo-placeholder-text {
+                font-size: 0.85rem;
+                font-weight: bold;
+                color: var(--choco-brown);
+            }
+
+            /* Pie de foto estilo Polaroid */
+            .polaroid-caption {
+                width: 100%;
+                text-align: center;
+            }
+
+            .polaroid-title {
+                font-size: 1.15rem;
+                color: var(--choco-brown);
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .polaroid-date {
+                display: inline-block;
+                background: var(--pastel-yellow);
+                color: var(--choco-dark);
+                font-size: 0.75rem;
+                padding: 3px 10px;
+                border-radius: 12px;
+                font-weight: bold;
+                margin-bottom: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .polaroid-note {
+                font-size: 0.88rem;
+                color: #6a5a58;
+                line-height: 1.4;
+                font-style: italic;
+            }
+
+            /* Adornos Sanrio en las esquinas */
+            .corner-badge {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                width: 32px;
+                height: 32px;
+                object-fit: contain;
+                pointer-events: none;
+            }
+
+            /* ==========================================================================
+    FOOTER
+       ========================================================================== */
+            .footer {
+                text-align: center;
+                margin-top: 20px;
+                padding: 15px;
+                color: var(--choco-brown);
+                font-size: 0.9rem;
+                background: rgba(255, 255, 255, 0.7);
+                border-radius: 20px;
+                backdrop-filter: blur(5px);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAVEGACIÓN SUPERIOR -->
+        <nav class="nav-container">
+            <a href="./index.html" class="btn-nav">
+                <span>←</span> Inicio
+            </a>
+            <a href="./canciones.html" class="btn-nav">
+                🎵 Canciones <span>→</span>
+            </a>
+        </nav>
+
+        <!-- ENCABEZADO -->
+        <header class="header-box">
+            <h1>
+                Nuestros 4 Momentos
+            </h1>
+            <p>
+                Cuatro fotos especiales de nosotros guardadas con mucho amor en
+                mi corazon. 💕
+            </p>
+        </header>
+
+        <!-- CONTENEDOR DE LOS 4 RECUERDOS -->
+        <main class="memories-grid">
+            <!-- RECUERDO 1 -->
+            <article class="polaroid-card">
+                <div class="washi-tape washi-pink"></div>
+
+                <div class="photo-frame">
+                    <!-- 
+        INSTRUCCIONES: Para colocar tu foto, borra el div .photo-placeholder-content 
+        y pon tu imagen así:
+        <img src="/ruta-de-tu-foto1.jpg" alt="Nuestro Primer Momento" />
+        -->
+                    <img src="src/assets/recuerdo3.jpg" alt="Nuestro Primer Momento">
+                        <span class="photo-placeholder-icon">📸</span>
+                        <p class="photo-placeholder-text">
+                            Pon tu foto #1 aquí
+                        </p>
+                </div>
+
+                <div class="polaroid-caption">
+                    <span class="polaroid-date">📅 Fecha especial</span>
+                    <h2 class="polaroid-title">Cuando viniste a mi Cumpleaños</h2>
+                    <p class="polaroid-note">
+                        "El día que me perdi en tus ojos."
+                    </p>
+                </div>
+
+            </article>
+
+            <!-- RECUERDO 2 -->
+            <article class="polaroid-card">
+                <div class="washi-tape washi-yellow"></div>
+
+                <div class="photo-frame">
+                    <!-- Coloca aquí tu imagen 2 -->
+                    <img src="src/assets/recuerdo2.jpg" alt="Salida">
+                        <span class="photo-placeholder-icon">🐱</span>
+                        <p class="photo-placeholder-text">
+                            Pon tu foto #2 aquí
+                        </p>
+                </div>
+
+                <div class="polaroid-caption">
+                    <span class="polaroid-date">📅 Cita inolvidable</span>
+                    <h2 class="polaroid-title">Una Salida Especial</h2>
+                    <p class="polaroid-note">
+                        "Risas, besos y tu carita se quedaron mi mente hasta hoy."
+                    </p>
+                </div>
+
+            </article>
+
+            <!-- RECUERDO 3 -->
+            <article class="polaroid-card">
+                <div class="washi-tape washi-yellow"></div>
+
+                <div class="photo-frame">
+                    <!-- Coloca aquí tu imagen 3 -->
+                    <img src="src/assets/recuerdo4.jpg" alt="Favorito">
+                        <span class="photo-placeholder-icon">✨</span>
+                        <p class="photo-placeholder-text">
+                            Pon tu foto #3 aquí
+                        </p>
+                </div>
+
+                <div class="polaroid-caption">
+                    <span class="polaroid-date">📅 Día favorito</span>
+                    <h2 class="polaroid-title">Tu Sonrisa Favorita</h2>
+                    <p class="polaroid-note">
+                        "Verte feliz es lo único que necesito para tener un buen
+                        día."
+                    </p>
+                </div>
+
+
+            </article>
+
+            <!-- RECUERDO 4 -->
+            <article class="polaroid-card">
+                <div class="washi-tape washi-pink"></div>
+
+                <div class="photo-frame">
+                    <!-- Coloca aquí tu imagen 4 -->
+                    <img src="src/assets/recuerdo1.jpg" alt="">
+                        <span class="photo-placeholder-icon">💖</span>
+                        <p class="photo-placeholder-text">
+                            Pon tu foto #4 aquí
+                        </p>
+
+                </div>
+
+                <div class="polaroid-caption">
+                    <span class="polaroid-date">📅 Para Siempre</span>
+                    <h2 class="polaroid-title">Juntos Tú y Yo</h2>
+                    <p class="polaroid-note">
+                        "Creando más recuerdos hermosos cada día que pasa."
+                    </p>
+                </div>
+
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/en/2/23/Chococat.png"
+                    class="corner-badge"
+                    alt="Chococat"
+                />
+            </article>
+        </main>
+
+        <footer class="footer">
+            Hecho con mucho amor y detalle 🎀
+        </footer>
+    </body>
+</html>
